@@ -41,8 +41,11 @@ namespace Extensions {
         private string url;
         private string uuid;
         private double global_state;
+        private bool system;
         
         private bool should_set_state = true;
+
+        public signal void remove_extension_rows (string uuid);
 
         [GtkCallback]
         public void open_website () {
@@ -82,7 +85,7 @@ namespace Extensions {
             try {
                 bool success = Application.dbus_extensions.uninstall_extension (uuid);
                 if (success) {
-                    // TODO send remove signal to window
+                    remove_extension_rows (uuid);
                 }
             } catch (GLib.Error e) {
                 print ("%s\n", e.message);
@@ -95,6 +98,7 @@ namespace Extensions {
             url = variant.lookup ("url").get_string ();
             global_state = variant.lookup ("state").get_double ();
             
+
             if (Application.dbus_extensions.user_extensions_enabled == false) {
                 enabledSwitch.set_sensitive (false);
             } if (Application.dbus_extensions.user_extensions_enabled == true) {
@@ -124,9 +128,11 @@ namespace Extensions {
                 prefsButton.set_sensitive (true);
             }
             if (variant.lookup ("type").get_double () == 1.0) {
+                system = true;
                 removeButton.set_sensitive (false);
             } else if (variant.lookup ("type").get_double () == 2.0) {
                 removeButton.set_sensitive (true);
+                system = false;
             }
 
             Application.dbus_extensions.extension_state_changed.connect ((uuid, state) => {
@@ -140,27 +146,6 @@ namespace Extensions {
                     }
                 }
             });
-
-            // i hate this
-            // Application.dbus_extensions.extension_state_changed.connect ((in_uuid, state) => {
-            //     if (uuid == in_uuid) {
-            //         if (Window.extensions_enabled == false || Application.dbus_extensions.user_extensions_enabled == false) {
-            //             enabledSwitch.set_active (false);
-            //         } else {
-            //             if (state.lookup ("state").get_double () == 1.0) {
-            //                 enabledSwitch.set_active (true);
-            //                 enabledSwitch.set_sensitive (true);
-            //             } else {
-            //                 enabledSwitch.set_active (false);
-            //             }
-            //         }
-            //     }
-            //     if (Window.extensions_enabled == false) {
-            //         enabledSwitch.set_sensitive (false);
-            //     } else if (Window.extensions_enabled == true) {
-            //         enabledSwitch.set_sensitive (true);
-            //     }
-            // });
         }
 
         public void set_extension_global_state (bool state) {
@@ -175,6 +160,10 @@ namespace Extensions {
                 }
                 should_set_state = true;
             }
+        }
+
+        public bool is_system_extension () {
+            return system;
         }
     }
 }

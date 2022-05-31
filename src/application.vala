@@ -56,6 +56,12 @@ namespace Extensions {
             Gtk.show_about_dialog (this.active_window,
                                    "program-name", "Extensions",
                                    "authors", authors,
+                                   "comments", "Manage and find new GNOME extensions",
+                                   "copyright", "Made with <3 by Jamie Murphy",
+                                   "logo-icon-name", "application-x-addon",
+                                   "website", "https://itsjamie.dev",
+                                   "website-label", "My Personal Website",
+                                   "license-type", Gtk.License.GPL_3_0,
                                    "version", "0.1.0");
         }
     }
