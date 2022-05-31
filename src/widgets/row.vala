@@ -55,6 +55,21 @@ namespace Extensions {
             }
         }
         
+        [GtkCallback]
+        public bool set_extension_state (bool state) {
+            try {
+                if (state == true) {
+                    Application.dbus_extensions.enable_extension (uuid);
+                } else {
+                    Application.dbus_extensions.disable_extension (uuid);
+                }  
+            } catch (GLib.Error e) {
+                print ("%s\n", e.message);
+            }
+            
+            return false;
+        }
+        
         public Row (string in_uuid, GLib.HashTable<string, GLib.Variant> variant) {
             Object ();
             uuid = in_uuid;
