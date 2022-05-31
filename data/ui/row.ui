@@ -126,6 +126,12 @@
                     <signal name="clicked" handler="open_preferences" />
                   </object>
                 </child>
+                <child>
+                  <object class="GtkButton" id="moreInfoButton">
+                    <property name="label" translatable="yes">More Info…</property>
+                    <signal name="clicked" handler="open_more_info" />
+                  </object>
+                </child>
               </object>
             </child>
             <child type="end">
