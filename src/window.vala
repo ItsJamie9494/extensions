@@ -23,6 +23,20 @@ namespace Extensions {
         private unowned Gtk.ListBox user_box;
         [GtkChild]
         private unowned Gtk.ListBox system_box;
+        [GtkChild]
+        private unowned Gtk.Switch enabledSwitch;
+
+        public GLib.HashTable<string, Row> rows = new GLib.HashTable<string, Row> (str_hash, str_equal);
+
+        [GtkCallback]
+        public bool user_extensions_set (bool state) {
+            Application.dbus_extensions.user_extensions_enabled = state;
+
+            rows.foreach ((uuid, row) => {
+                row.set_extension_global_state (state);
+            });
+            return false;
+        }
 
         public Window (Adw.Application app) {
             Object (application: app);
@@ -30,15 +44,18 @@ namespace Extensions {
             try {
                 Application.dbus_extensions.list_extensions ().foreach ((extension, variant) => {
                     if (variant.lookup ("type").get_double () == 1.0) {
-                         system_box.append (new Row (extension, variant));
+                        rows.insert (extension, new Row (extension, variant));
+                        system_box.append (rows.lookup (extension));
                     } else {
-                         user_box.append (new Row (extension, variant));
+                        rows.insert (extension, new Row (extension, variant));
+                        user_box.append (rows.lookup (extension));
                     }
                 });
             } catch (GLib.Error e) {
                 print ("%s\n", e.message);
             }
 
+            enabledSwitch.set_active (Application.dbus_extensions.user_extensions_enabled);
         }
     }
 }
