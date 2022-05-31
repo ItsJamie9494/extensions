@@ -38,13 +38,7 @@ namespace Extensions {
         public override void activate () {
             try {
                 dbus_extensions = Bus.get_proxy_sync (SESSION, "org.gnome.Shell.Extensions", "/org/gnome/Shell/Extensions");
-                dbus_extensions.list_extensions ().foreach ((extension) => {
-                    print (extension + "\n");
-                });
             } catch (GLib.IOError e) {
-                print ("%s\n", e.message);
-                return;
-            } catch (GLib.Error e) {
                 print ("%s\n", e.message);
                 return;
             }
