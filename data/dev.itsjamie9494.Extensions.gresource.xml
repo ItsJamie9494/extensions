@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
   <gresource prefix="/dev/itsjamie9494/Extensions">
+    <file>style.css</file>
     <file alias="window.ui">ui/window.ui</file>
     <file alias="row.ui">ui/row.ui</file>
     <file alias="gtk/help-overlay.ui">ui/gtk/help-overlay.ui</file>
