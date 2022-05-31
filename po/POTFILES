@@ -1,0 +1,8 @@
+data/dev.jamiethalacker.Extensions.desktop.in
+data/dev.jamiethalacker.Extensions.appdata.xml.in
+data/dev.jamiethalacker.Extensions.gschema.xml
+src/window.ui
+
+src/main.vala
+src/window.vala
+
