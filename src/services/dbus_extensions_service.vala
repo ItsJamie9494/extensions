@@ -23,5 +23,8 @@ namespace Extensions {
         public abstract void open_extension_prefs (string uuid, string parent_window, GLib.HashTable<string, GLib.Variant> options) throws GLib.Error;
         public abstract bool enable_extension (string uuid) throws GLib.Error;
         public abstract bool disable_extension (string uuid) throws GLib.Error;
+        public abstract bool uninstall_extension (string uuid) throws GLib.Error;
+        public abstract bool user_extensions_enabled { owned get; set; }
+        public abstract signal void extension_state_changed (string uuid, GLib.HashTable<string, GLib.Variant> state);
     }
 }

@@ -135,6 +135,7 @@
                           bind-flags="sync-create"/>
                 <property name="label" translatable="yes">Remove…</property>
                 <property name="sensitive">false</property>
+                <signal name="clicked" handler="remove_extension" />
               </object>
             </child>
           </object>
