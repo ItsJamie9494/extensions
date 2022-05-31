@@ -44,16 +44,91 @@ namespace Extensions {
             try {
                 Application.dbus_extensions.list_extensions ().foreach ((extension, variant) => {
                     if (variant.lookup ("type").get_double () == 1.0) {
-                        rows.insert (extension, new Row (extension, variant));
+                        var row = new Row (extension, variant);
+                        row.remove_extension_rows.connect ((uuid) => {
+                            var ext = rows.lookup (uuid);
+                            rows.remove (uuid);
+                            if (ext.is_system_extension ()) {
+                                system_box.remove (ext);
+                                ext.unparent ();
+                                ext.destroy ();
+                            } else {
+                                user_box.remove (ext);
+                                ext.unparent ();
+                                ext.destroy ();
+                            }
+                        });
+                        rows.insert (extension, row);
                         system_box.append (rows.lookup (extension));
                     } else {
-                        rows.insert (extension, new Row (extension, variant));
+                        var row = new Row (extension, variant);
+                        row.remove_extension_rows.connect ((uuid) => {
+                            var ext = rows.lookup (uuid);
+                            rows.remove (uuid);
+                            if (ext.is_system_extension ()) {
+                                system_box.remove (ext);
+                                ext.unparent ();
+                                ext.destroy ();
+                            } else {
+                                user_box.remove (ext);
+                                ext.unparent ();
+                                ext.destroy ();
+                            }
+                        });
+                        rows.insert (extension, row);
                         user_box.append (rows.lookup (extension));
                     }
                 });
             } catch (GLib.Error e) {
                 print ("%s\n", e.message);
             }
+
+            Application.dbus_extensions.extension_state_changed.connect ((uuid) => {
+               if (!rows.contains (uuid)) {
+                    try {
+                        var variant = Application.dbus_extensions.get_extension_info (uuid);
+                        if (variant.size () == 0) {
+                            return;
+                        } else if (variant.lookup ("type").get_double () == 1.0) {
+                            var row = new Row (uuid, variant);
+                            row.remove_extension_rows.connect ((uuid) => {
+                                var ext = rows.lookup (uuid);
+                                rows.remove (uuid);
+                                if (ext.is_system_extension ()) {
+                                    system_box.remove (ext);
+                                    ext.unparent ();
+                                    ext.destroy ();
+                                } else {
+                                    user_box.remove (ext);
+                                    ext.unparent ();
+                                    ext.destroy ();
+                                }
+                            });
+                            rows.insert (uuid, row);
+                            system_box.append (rows.lookup (uuid));
+                        } else {
+                            var row = new Row (uuid, variant);
+                            row.remove_extension_rows.connect ((uuid) => {
+                                var ext = rows.lookup (uuid);
+                                rows.remove (uuid);
+                                if (ext.is_system_extension ()) {
+                                    system_box.remove (ext);
+                                    ext.unparent ();
+                                    ext.destroy ();
+                                } else {
+                                    user_box.remove (ext);
+                                    ext.unparent ();
+                                    ext.destroy ();
+                                }
+                            });
+                            rows.insert (uuid, row);
+                            user_box.append (rows.lookup (uuid));
+                        }
+                    } catch (GLib.Error e) {
+                        print ("%s\n", e.message);
+                    }
+               }
+            });
 
             enabledSwitch.set_active (Application.dbus_extensions.user_extensions_enabled);
         }

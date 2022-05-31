@@ -20,6 +20,7 @@ namespace Extensions {
     [DBus (name = "org.gnome.Shell.Extensions")]
     public interface ExtensionsService : GLib.Object {
         public abstract GLib.HashTable<string, GLib.HashTable<string, GLib.Variant>> list_extensions () throws GLib.Error;
+        public abstract GLib.HashTable<string, GLib.Variant> get_extension_info (string uuid) throws GLib.Error;
         public abstract void open_extension_prefs (string uuid, string parent_window, GLib.HashTable<string, GLib.Variant> options) throws GLib.Error;
         public abstract bool enable_extension (string uuid) throws GLib.Error;
         public abstract bool disable_extension (string uuid) throws GLib.Error;
