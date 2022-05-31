@@ -96,6 +96,7 @@
               <object class="GtkSwitch" id="enabledSwitch">
                 <property name="sensitive">true</property>
                 <property name="valign">center</property>
+                <signal name="state_set" handler="set_extension_state" />
               </object>
             </child>
           </object>
