@@ -19,8 +19,20 @@
 namespace Extensions {
     [GtkTemplate (ui = "/dev/itsjamie9494/Extensions/window.ui")]
     public class Window : Adw.ApplicationWindow {
+        [GtkChild]
+        private unowned Gtk.Box box;
+
         public Window (Adw.Application app) {
             Object (application: app);
+
+            try {
+                Application.dbus_extensions.list_extensions ().foreach ((extension, variant) => {
+                    box.append (new Row (extension, variant));
+                });
+            } catch (GLib.Error e) {
+                print ("%s\n", e.message);
+            }
+
         }
     }
 }

@@ -1,6 +1,7 @@
 sources = [
   'application.vala',
   'window.vala',
+  'widgets/row.vala',
   'services/dbus_extensions_service.vala',
 ]
 
