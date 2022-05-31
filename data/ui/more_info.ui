@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+    <requires lib="gtk" version="4.0" />
+    <template class="ExtensionsMoreInfoDialog" parent="GtkWindow">
+        <property name="modal">true</property>
+        <property name="default-height">400</property>
+        <property name="default-width">300</property>
+        <property name="decorated">false</property>
+        <child>
+            <object class="GtkBox">
+                <property name="orientation">vertical</property>
+                <property name="vexpand">true</property>
+                <child>
+                    <object class="GtkImage">
+                        <property name="icon-name">dialog-information-symbolic</property>
+                        <property name="margin-top">24</property>
+                        <property name="pixel-size">64</property>
+                    </object>
+                </child>
+                <child>
+                    <object class="GtkLabel" id="header">
+                        <property name="halign">center</property>
+                        <property name="xalign">0.5</property>
+                        <property name="vexpand">False</property>
+                        <property name="ellipsize">end</property>
+                        <property name="wrap">true</property>
+                        <property name="margin-top">24</property>
+                        <style>
+                            <class name="title-2" />
+                        </style>
+                    </object>
+                </child>
+                <child>
+                  <object class="GtkFlowBox">
+                    <property name="homogeneous">false</property>
+                    <property name="max-children-per-line">2</property>
+                    <property name="min-children-per-line">2</property>
+                    <property name="column-spacing">10</property>
+                    <property name="row-spacing">5</property>
+                    <property name="selection-mode">none</property>
+                    <child>
+                                  <object class="GtkLabel">
+                                      <property name="label">UUID</property>
+                                      <property name="halign">center</property>
+                                      <property name="xalign">0.5</property>
+                                      <property name="vexpand">False</property>
+                                      <property name="wrap">true</property>
+                                      <property name="margin-top">24</property>
+                                      <property name="justify">center</property>
+                                  </object>
+                              </child>
+                    <child>
+                                  <object class="GtkLabel" id="uuidLabel">
+                                      <property name="halign">center</property>
+                                      <property name="xalign">0.5</property>
+                                      <property name="vexpand">False</property>
+                                      <property name="wrap">true</property>
+                                      <property name="margin-top">24</property>
+                                      <property name="justify">center</property>
+                                  </object>
+                              </child>
+                              <child>
+                                  <object class="GtkLabel">
+                                      <property name="label">Path</property>
+                                      <property name="halign">center</property>
+                                      <property name="xalign">0.5</property>
+                                      <property name="vexpand">False</property>
+                                      <property name="wrap">true</property>
+                                      <property name="margin-top">24</property>
+                                      <property name="justify">center</property>
+                                  </object>
+                              </child>
+                    <child>
+                                  <object class="GtkLabel" id="pathLabel">
+                                      <property name="halign">center</property>
+                                      <property name="xalign">0.5</property>
+                                      <property name="vexpand">False</property>
+                                      <property name="wrap">true</property>
+                                      <property name="margin-top">24</property>
+                                      <property name="justify">center</property>
+                                  </object>
+                              </child>
+                              <child>
+                                  <object class="GtkLabel">
+                                      <property name="label">URL</property>
+                                      <property name="halign">center</property>
+                                      <property name="xalign">0.5</property>
+                                      <property name="vexpand">False</property>
+                                      <property name="wrap">true</property>
+                                      <property name="margin-top">24</property>
+                                      <property name="justify">center</property>
+                                  </object>
+                              </child>
+                    <child>
+                                  <object class="GtkLabel" id="urlLabel">
+                                      <property name="halign">center</property>
+                                      <property name="xalign">0.5</property>
+                                      <property name="vexpand">False</property>
+                                      <property name="wrap">true</property>
+                                      <property name="margin-top">24</property>
+                                      <property name="justify">center</property>
+                                  </object>
+                              </child>
+                              <child>
+                                  <object class="GtkLabel">
+                                      <property name="label">Version</property>
+                                      <property name="halign">center</property>
+                                      <property name="xalign">0.5</property>
+                                      <property name="vexpand">False</property>
+                                      <property name="wrap">true</property>
+                                      <property name="margin-top">24</property>
+                                      <property name="justify">center</property>
+                                  </object>
+                              </child>
+                    <child>
+                                  <object class="GtkLabel" id="versionLabel">
+                                      <property name="halign">center</property>
+                                      <property name="xalign">0.5</property>
+                                      <property name="vexpand">False</property>
+                                      <property name="wrap">true</property>
+                                      <property name="margin-top">24</property>
+                                      <property name="justify">center</property>
+                                  </object>
+                              </child>
+                              <child>
+                                  <object class="GtkLabel">
+                                      <property name="label">State</property>
+                                      <property name="halign">center</property>
+                                      <property name="xalign">0.5</property>
+                                      <property name="vexpand">False</property>
+                                      <property name="wrap">true</property>
+                                      <property name="margin-top">24</property>
+                                      <property name="justify">center</property>
+                                  </object>
+                              </child>
+                    <child>
+                                  <object class="GtkLabel" id="stateLabel">
+                                      <property name="halign">center</property>
+                                      <property name="xalign">0.5</property>
+                                      <property name="vexpand">False</property>
+                                      <property name="wrap">true</property>
+                                      <property name="margin-top">24</property>
+                                      <property name="justify">center</property>
+                                  </object>
+                              </child>
+                              <child>
+                                  <object class="GtkLabel">
+                                      <property name="label">Description</property>
+                                      <property name="halign">center</property>
+                                      <property name="xalign">0.5</property>
+                                      <property name="vexpand">False</property>
+                                      <property name="wrap">true</property>
+                                      <property name="margin-top">24</property>
+                                      <property name="justify">center</property>
+                                  </object>
+                              </child>
+                    <child>
+                                  <object class="GtkLabel" id="descLabel">
+                                      <property name="halign">center</property>
+                                      <property name="xalign">0.5</property>
+                                      <property name="vexpand">False</property>
+                                      <property name="wrap">true</property>
+                                      <property name="margin-top">24</property>
+                                      <property name="justify">center</property>
+                                  </object>
+                              </child>
+                  </object>
+                </child>
+                <child>
+                    <object class="GtkBox">
+                        <property name="valign">end</property>
+                        <property name="vexpand">true</property>
+                        <property name="margin-start">24</property>
+                        <property name="margin-end">24</property>
+                        <property name="margin-bottom">24</property>
+                        <child>
+                            <object class="GtkButton" id="button_ok">
+                                <property name="label">Close</property>
+                                <property name="hexpand">true</property>
+                                <property name="halign">end</property>
+                                <signal name="clicked" handler="on_close" />
+                            </object>
+                        </child>
+                    </object>
+                </child>
+            </object>
+        </child>
+    </template>
+</interface>

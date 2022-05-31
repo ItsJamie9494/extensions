@@ -48,6 +48,13 @@ namespace Extensions {
         public signal void remove_extension_rows (string uuid);
 
         [GtkCallback]
+        public void open_more_info () {
+            var dialog = new Extensions.MoreInfoDialog (uuid);
+            dialog.set_transient_for (Application.main_window);
+            dialog.present ();
+        }
+
+        [GtkCallback]
         public void open_website () {
             Gtk.show_uri_full.begin (null, url, Gdk.CURRENT_TIME, null);
         }
