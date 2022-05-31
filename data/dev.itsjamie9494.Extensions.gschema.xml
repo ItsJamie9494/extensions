@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist gettext-domain="extensions">
+	<schema id="dev.itsjamie9494.Extensions" path="/dev/itsjamie9494/Extensions/">
+	</schema>
+</schemalist>

@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Extensions
+Exec=extensions
+Icon=dev.itsjamie9494.Extensions
+Terminal=false
+Type=Application
+Categories=GTK;
+StartupNotify=true

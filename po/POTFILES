@@ -1,0 +1,8 @@
+data/dev.itsjamie9494.Extensions.desktop.in
+data/dev.itsjamie9494.Extensions.appdata.xml.in
+data/dev.itsjamie9494.Extensions.gschema.xml
+src/window.ui
+
+src/main.vala
+src/window.vala
+
