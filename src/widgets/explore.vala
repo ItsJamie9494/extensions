@@ -29,7 +29,8 @@
                     Json.Array extensions = SoupClient.get_default ().get_extensions.end (res);
                     extensions.get_elements ().foreach ((node) => {
                         if (node.get_node_type () == Json.NodeType.OBJECT) {
-                            box.append (new Gtk.Label (node.get_object ().get_string_member ("uuid")));
+                            ExploreExtensionObject extension_obj = new ExploreExtensionObject (node.get_object ());
+                            box.append (new ExploreRow (extension_obj));
                         }
                     });
                 } catch (SoupError e) {
