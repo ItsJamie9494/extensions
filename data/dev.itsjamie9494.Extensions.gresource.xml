@@ -9,4 +9,9 @@
     <file alias="details.ui">ui/details.ui</file>
     <file alias="gtk/help-overlay.ui">ui/gtk/help-overlay.ui</file>
   </gresource>
+
+  <gresource prefix="/dev/itsjamie9494/Extensions/icons">
+    <file alias="scalable/actions/external-link-symbolic.svg">icons/hicolor/scalable/actions/external-link-symbolic.svg</file>
+    <file alias="scalable/actions/webpage-symbolic.svg">icons/hicolor/scalable/actions/webpage-symbolic.svg</file>
+  </gresource>
 </gresources>
