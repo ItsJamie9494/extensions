@@ -5,6 +5,7 @@
     <file alias="window.ui">ui/window.ui</file>
     <file alias="more-info.ui">ui/more_info.ui</file>
     <file alias="row.ui">ui/row.ui</file>
+    <file alias="explore.ui">ui/explore.ui</file>
     <file alias="gtk/help-overlay.ui">ui/gtk/help-overlay.ui</file>
   </gresource>
 </gresources>

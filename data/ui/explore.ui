@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+    <requires lib="gtk" version="4.0"/>
+    <template class="ExtensionsExplore" parent="AdwBin">
+        <child>
+            <object class="GtkBox">
+                <property name="orientation">vertical</property>
+                <child>
+                    <object class="GtkLabel">
+                        <property name="label">Hello Fuckers</property>
+                    </object>
+                </child>
+            </object>
+        </child>
+    </template>
+</interface>
