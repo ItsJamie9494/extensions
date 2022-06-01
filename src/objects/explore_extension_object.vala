@@ -62,5 +62,18 @@ namespace Extensions {
             }
             return exported_icon;
         }
+
+        public string get_uri_hostname (string uri) {
+            string url;
+
+            try {
+                url = Uri.parse ("https://extensions.gnome.org%s".printf (uri), Soup.HTTP_URI_FLAGS).get_host ();
+            } catch (Error e) {
+                url = uri;
+                warning ("Error parsing URI: %s", e.message);
+            }
+
+            return url;
+        }
     }
 }
