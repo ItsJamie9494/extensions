@@ -28,6 +28,7 @@
 
             this.set_title (GLib.Markup.escape_text (obj.name));
             this.set_subtitle (GLib.Markup.escape_text (obj.description.split (".\n")[0]));
+            this.set_subtitle_lines (3);
             var image = new Gtk.Image ();
             image.set_pixel_size (32);
             obj.get_gicon.begin ((object, res) => {
