@@ -3,12 +3,21 @@
     <requires lib="gtk" version="4.0"/>
     <template class="ExtensionsExplore" parent="AdwBin">
         <signal name="realize" handler="on_realise" />
+        <property name="margin-start">20</property>
+        <property name="margin-end">20</property>
+        <property name="margin-top">20</property>
+        <property name="margin-bottom">20</property>
         <child>
-            <object class="GtkFlowBox" id="box">
-                <property name="orientation">vertical</property>
+            <object class="GtkScrolledWindow">
+                <property name="hscrollbar-policy">never</property>
+                <property name="min-content-width">900</property>
                 <child>
-                    <object class="GtkLabel">
-                        <property name="label">Hello Fuckers</property>
+                    <object class="GtkFlowBox" id="box">
+                        <property name="min-children-per-line">2</property>
+                        <property name="column-spacing">14</property>
+                        <property name="row-spacing">14</property>
+                        <property name="valign">start</property>
+                        <property name="hexpand">True</property>
                     </object>
                 </child>
             </object>
