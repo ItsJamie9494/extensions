@@ -26,7 +26,7 @@ namespace Extensions {
         }
 
         public static ExtensionsService dbus_extensions;
-        public static Gtk.Window main_window;
+        public static Extensions.Window main_window;
         
         construct {
             ActionEntry[] action_entries = {
@@ -52,7 +52,7 @@ namespace Extensions {
             if (win == null) {
                 win = new Extensions.Window (this);
             }
-            main_window = win;
+            main_window = win as Extensions.Window;
             win.present ();
         }
 

@@ -9,6 +9,7 @@
                 <property name="min-content-width">900</property>
                 <child>
                     <object class="GtkFlowBox" id="box">
+                        <signal name="child-activated" handler="on_click" />
                         <property name="min-children-per-line">3</property>
                         <property name="column-spacing">14</property>
                         <property name="row-spacing">14</property>
