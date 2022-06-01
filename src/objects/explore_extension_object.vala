@@ -36,12 +36,12 @@ namespace Extensions {
             uuid = obj.get_string_member_with_default ("uuid", "unknown@example.com");
             name = obj.get_string_member_with_default ("name", "Unknown Extension");
             creator = obj.get_string_member_with_default ("creator", "Unknown Developer");
-            creator_url = obj.get_string_member_with_default ("creator_url", "https://example.com");
+            creator_url = obj.get_string_member_with_default ("creator_url", "null");
             pk = obj.get_int_member_with_default ("pk", 0);
             description = obj.get_string_member_with_default ("description", "No Description Provided");
-            link = obj.get_string_member_with_default ("link", "https://example.com");
+            link = obj.get_string_member_with_default ("link", "null");
             // TODO write icon code
-            icon = obj.get_string_member_with_default ("icon", "https://example.com");
+            icon = obj.get_string_member_with_default ("icon", "null");
             if (obj.get_null_member ("screenshot")) {
                 screenshot = null;
             } else {
