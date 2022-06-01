@@ -24,6 +24,13 @@
 
             this.set_title (GLib.Markup.escape_text (obj.name));
             this.set_subtitle (GLib.Markup.escape_text (obj.description.split (".\n")[0]));
+            var image = new Gtk.Image ();
+            image.set_pixel_size (32);
+            obj.get_gicon.begin ((object, res) => {
+                var icon = obj.get_gicon.end (res);
+                image.set_from_pixbuf (icon);
+                this.add_prefix (image);
+            });
         }
     }
 }
