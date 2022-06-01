@@ -25,6 +25,8 @@
         private unowned Gtk.Label details_title;
         [GtkChild]
         private unowned Gtk.Label developer_name;
+        [GtkChild]
+        private unowned Gtk.Label details_description;
 
         public Details () {
             Object ();
@@ -38,6 +40,7 @@
                         details_icon.set_from_pixbuf (extension.get_gicon.end (res));
                     });
                     developer_name.set_label (extension.creator);
+                    details_description.set_label (extension.description);
                 });
             });
         }
