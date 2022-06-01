@@ -49,5 +49,18 @@ namespace Extensions {
             }
             shell_version_map = obj.get_object_member ("shell_version_map");
         }
+
+        public async Gdk.Pixbuf get_gicon () {
+            Gdk.Pixbuf? exported_icon = null;
+            var file = File.new_for_uri ("https://extensions.gnome.org%s".printf (icon));
+            try {
+                var stream = file.read ();
+                exported_icon = new Gdk.Pixbuf.from_stream (stream);
+                stream.close ();
+            } catch (GLib.Error e) {
+                print ("%s\n", e.message);
+            }
+            return exported_icon;
+        }
     }
 }
