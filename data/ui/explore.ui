@@ -9,7 +9,7 @@
                 <property name="min-content-width">900</property>
                 <child>
                     <object class="GtkFlowBox" id="box">
-                        <property name="min-children-per-line">2</property>
+                        <property name="min-children-per-line">3</property>
                         <property name="column-spacing">14</property>
                         <property name="row-spacing">14</property>
                         <property name="valign">start</property>
