@@ -19,6 +19,25 @@
  namespace Extensions {
     [GtkTemplate (ui = "/dev/itsjamie9494/Extensions/explore.ui")]
     public class Explore : Adw.Bin {
+        [GtkChild]
+        private unowned Gtk.FlowBox box;
+
+        [GtkCallback]
+        public void on_realise () {
+            SoupClient.get_default ().get_extensions.begin ((obj, res) => {
+                try {
+                    Json.Array extensions = SoupClient.get_default ().get_extensions.end (res);
+                    extensions.get_elements ().foreach ((node) => {
+                        if (node.get_node_type () == Json.NodeType.OBJECT) {
+                            box.append (new Gtk.Label (node.get_object ().get_string_member ("uuid")));
+                        }
+                    });
+                } catch (SoupError e) {
+                    print ("%s\n", e.message);
+                }
+            });
+        }
+
         public Explore () {
             Object ();
         }
