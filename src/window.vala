@@ -31,6 +31,7 @@ namespace Extensions {
         private unowned Adw.WindowTitle details_title;
 
         public GLib.HashTable<string, Row> rows = new GLib.HashTable<string, Row> (str_hash, str_equal);
+        public signal void set_details_content (ExploreExtensionObject obj);
 
         [GtkCallback]
         public bool user_extensions_set (bool state) {
@@ -50,6 +51,7 @@ namespace Extensions {
         public void open_details (ExploreExtensionObject obj) {
             leaflet.navigate (Adw.NavigationDirection.FORWARD);
             details_title.set_title (obj.name);
+            set_details_content (obj);
         }
 
         public Window (Adw.Application app) {

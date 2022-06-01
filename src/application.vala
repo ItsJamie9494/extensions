@@ -35,8 +35,6 @@ namespace Extensions {
             };
             this.add_action_entries (action_entries, this);
             this.set_accels_for_action ("app.quit", {"<primary>q"});
-
-            typeof (Explore).ensure ();
         }
 
         public override void activate () {
@@ -54,6 +52,9 @@ namespace Extensions {
             }
             main_window = win as Extensions.Window;
             win.present ();
+
+            typeof (Explore).ensure ();
+            typeof (Details).ensure ();
         }
 
         private void on_about_action () {
