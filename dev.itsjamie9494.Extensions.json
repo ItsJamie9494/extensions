@@ -10,7 +10,8 @@
         "--socket=fallback-x11",
         "--device=dri",
         "--socket=wayland",
-        "--socket=session-bus"
+        "--socket=session-bus",
+        "--filesystem=xdg-run/gvfsd"
     ],
     "cleanup" : [
         "/include",
