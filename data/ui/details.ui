@@ -184,6 +184,92 @@
                                 </child>
                             </object>
                         </child>
+                        <child>
+                            <object class="AdwClamp">
+                                <property name="maximum-size">860</property>
+                                <property name="tightening-threshold">576</property>
+                                <property name="margin-start">12</property>
+                                <property name="margin-end">12</property>
+                                <child>
+                                    <object class="GtkBox">
+                                        <property name="orientation">vertical</property>
+                                        <property name="spacing">12</property>
+                                        <child>
+                                            <object class="GtkFlowBox">
+                                                <property name="selection-mode">none</property>
+                                                <property name="halign">fill</property>
+                                                <property name="valign">start</property>
+                                                <property name="hexpand">true</property>
+                                                <property name="homogeneous">true</property>
+                                                <style>
+                                                    <class name="boxed-list" />
+                                                </style>
+                                                <property name="orientation">horizontal</property>
+
+                                                <child>
+                                                    <object class="GtkFlowBoxChild">
+                                                        <property name="visible" bind-source="project_website_row" bind-property="visible" bind-flags="sync-create" />
+                                                        <child>
+                                                            <object class="GtkListBox">
+                                                                <property name="selection-mode">none</property>
+                                                                <style>
+                                                                    <class name="boxed-list" />
+                                                                </style>
+                                                                <child>
+                                                                    <object class="AdwActionRow" id="project_website_row">
+                                                                        <property name="visible">false</property>
+                                                                        <property name="activatable">True</property>
+                                                                        <property name="icon-name">webpage-symbolic</property>
+                                                                        <property name="title" translatable="yes">Extension on GNOME Extensions</property>
+                                                                        <property name="subtitle">tauos.co</property>
+                                                                        <property name="use-underline">True</property>
+                                                                        <signal name="activated" handler="on_url_clicked" />
+                                                                        <child>
+                                                                            <object class="GtkImage">
+                                                                                <property name="icon-name">external-link-symbolic</property>
+                                                                            </object>
+                                                                        </child>
+                                                                    </object>
+                                                                </child>
+                                                            </object>
+                                                        </child>
+                                                    </object>
+                                                </child>
+
+                                                <child>
+                                                    <object class="GtkFlowBoxChild">
+                                                        <property name="visible" bind-source="dev_row" bind-property="visible" bind-flags="sync-create" />
+                                                        <child>
+                                                            <object class="GtkListBox">
+                                                                <property name="selection-mode">none</property>
+                                                                <style>
+                                                                    <class name="boxed-list" />
+                                                                </style>
+                                                                <child>
+                                                                    <object class="AdwActionRow" id="dev_row">
+                                                                        <property name="visible">false</property>
+                                                                        <property name="activatable">True</property>
+                                                                        <property name="icon-name">user-info-symbolic</property>
+                                                                        <property name="title" translatable="yes">_Creator Information</property>
+                                                                        <property name="use-underline">True</property>
+                                                                        <signal name="activated" handler="on_url_clicked" />
+                                                                        <child>
+                                                                            <object class="GtkImage">
+                                                                                <property name="icon-name">external-link-symbolic</property>
+                                                                            </object>
+                                                                        </child>
+                                                                    </object>
+                                                                </child>
+                                                            </object>
+                                                        </child>
+                                                    </object>
+                                                </child>
+                                            </object>
+                                        </child>
+                                    </object>
+                                </child>
+                            </object>
+                        </child>
                     </object>
                 </child>
             </object>
