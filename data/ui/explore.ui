@@ -3,10 +3,6 @@
     <requires lib="gtk" version="4.0"/>
     <template class="ExtensionsExplore" parent="AdwBin">
         <signal name="realize" handler="on_realise" />
-        <property name="margin-start">20</property>
-        <property name="margin-end">20</property>
-        <property name="margin-top">20</property>
-        <property name="margin-bottom">20</property>
         <child>
             <object class="GtkScrolledWindow">
                 <property name="hscrollbar-policy">never</property>
@@ -18,6 +14,10 @@
                         <property name="row-spacing">14</property>
                         <property name="valign">start</property>
                         <property name="hexpand">True</property>
+                        <property name="margin-start">20</property>
+                        <property name="margin-end">20</property>
+                        <property name="margin-top">20</property>
+                        <property name="margin-bottom">20</property>
                     </object>
                 </child>
             </object>
