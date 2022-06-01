@@ -39,6 +39,14 @@
             });
         }
 
+        [GtkCallback]
+        public void on_click (Gtk.FlowBoxChild fb_child) {
+            var ext_child = fb_child.get_child ();
+            if (ext_child.get_type () == typeof (ExploreRow)) {
+                Application.main_window.open_details (((ExploreRow) ext_child).extension);
+            }
+        }
+
         public Explore () {
             Object ();
         }

@@ -19,8 +19,12 @@
  namespace Extensions {
     public class ExploreRow : Adw.ActionRow {
 
+        public ExploreExtensionObject extension;
+
         public ExploreRow (ExploreExtensionObject obj) {
             Object ();
+
+            extension = obj;
 
             this.set_title (GLib.Markup.escape_text (obj.name));
             this.set_subtitle (GLib.Markup.escape_text (obj.description.split (".\n")[0]));

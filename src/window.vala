@@ -25,6 +25,10 @@ namespace Extensions {
         private unowned Gtk.ListBox system_box;
         [GtkChild]
         private unowned Gtk.Switch enabledSwitch;
+        [GtkChild]
+        private unowned Adw.Leaflet leaflet;
+        [GtkChild]
+        private unowned Adw.WindowTitle details_title;
 
         public GLib.HashTable<string, Row> rows = new GLib.HashTable<string, Row> (str_hash, str_equal);
 
@@ -36,6 +40,16 @@ namespace Extensions {
                 row.set_extension_global_state (state);
             });
             return false;
+        }
+
+        [GtkCallback]
+        public void back_clicked () {
+            leaflet.navigate (Adw.NavigationDirection.BACK);
+        }
+
+        public void open_details (ExploreExtensionObject obj) {
+            leaflet.navigate (Adw.NavigationDirection.FORWARD);
+            details_title.set_title (obj.name);
         }
 
         public Window (Adw.Application app) {

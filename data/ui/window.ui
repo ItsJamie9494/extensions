@@ -6,127 +6,163 @@
         <property name="default-height">600</property>
         <property name="title" translatable="yes">Extensions</property>
         <child>
-            <object class="GtkBox">
-                <property name="orientation">vertical</property>
-                <child>
-                    <object class="AdwHeaderBar">
-                        <property name="title-widget">
-                            <object class="AdwViewSwitcherTitle" id="switcher_title">
-                                <property name="stack">stack</property>
-                                <property name="title" bind-source="ExtensionsWindow" bind-property="title" bind-flags="sync-create" />
-                            </object>
-                        </property>
-                        <child type="end">
-                            <object class="GtkMenuButton">
-                                <property name="icon-name">open-menu-symbolic</property>
-                                <property name="menu-model">primary_menu</property>
-                            </object>
-                        </child>
-                    </object>
-                </child>
+            <object class="AdwLeaflet" id="leaflet">
+                <property name="can-unfold">false</property>
+                <property name="transition-type">over</property>
                 <child>
                     <object class="GtkBox">
+                        <property name="name">main</property>
                         <property name="orientation">vertical</property>
                         <child>
-                            <object class="AdwViewStack" id="stack">
-                                <property name="vexpand">True</property>
-                                <child>
-                                    <object class="AdwViewStackPage">
-                                      <property name="title">Explore</property>
-                                      <property name="icon-name">starred-symbolic</property>
-                                      <property name="child">
-                                          <object class="ExtensionsExplore"></object>
-                                      </property>
+                            <object class="AdwHeaderBar">
+                                <property name="title-widget">
+                                    <object class="AdwViewSwitcherTitle" id="switcher_title">
+                                        <property name="stack">stack</property>
+                                        <property name="title" bind-source="ExtensionsWindow" bind-property="title" bind-flags="sync-create" />
+                                    </object>
+                                </property>
+                                <child type="end">
+                                    <object class="GtkMenuButton">
+                                        <property name="icon-name">open-menu-symbolic</property>
+                                        <property name="menu-model">primary_menu</property>
                                     </object>
                                 </child>
+                            </object>
+                        </child>
+                        <child>
+                            <object class="GtkBox">
+                                <property name="orientation">vertical</property>
                                 <child>
-                                    <object class="AdwViewStackPage">
-                                        <property name="title">My Extensions</property>
-                                        <property name="icon-name">application-x-addon-symbolic</property>
-                                        <property name="child">
-                                            <object class="GtkScrolledWindow">
-                                                <property name="vexpand">true</property>
-                                                <child>
-                                                    <object class="GtkBox">
-                                                        <property name="orientation">vertical</property>
+                                    <object class="AdwViewStack" id="stack">
+                                        <property name="vexpand">True</property>
+                                        <child>
+                                            <object class="AdwViewStackPage">
+                                              <property name="title">Explore</property>
+                                              <property name="icon-name">starred-symbolic</property>
+                                              <property name="child">
+                                                  <object class="ExtensionsExplore"></object>
+                                              </property>
+                                            </object>
+                                        </child>
+                                        <child>
+                                            <object class="AdwViewStackPage">
+                                                <property name="title">My Extensions</property>
+                                                <property name="icon-name">application-x-addon-symbolic</property>
+                                                <property name="child">
+                                                    <object class="GtkScrolledWindow">
+                                                        <property name="vexpand">true</property>
                                                         <child>
-                                                            <object class="AdwPreferencesGroup">
-                                                                <property name="margin-start">20</property>
-                                                                <property name="margin-end">20</property>
-                                                                <property name="margin-top">20</property>
-                                                                <property name="margin-bottom">20</property>
+                                                            <object class="GtkBox">
+                                                                <property name="orientation">vertical</property>
                                                                 <child>
-                                                                    <object class="GtkListBox">
-                                                                        <property name="margin-start">10</property>
-                                                                        <property name="margin-end">10</property>
-                                                                        <style>
-                                                                            <class name="boxed-list" />
-                                                                        </style>
+                                                                    <object class="AdwPreferencesGroup">
+                                                                        <property name="margin-start">20</property>
+                                                                        <property name="margin-end">20</property>
+                                                                        <property name="margin-top">20</property>
+                                                                        <property name="margin-bottom">20</property>
                                                                         <child>
-                                                                            <object class="AdwActionRow">
-                                                                                <property name="title" translatable="yes">Extensions</property>
-                                                                                <property name="subtitle" translatable="yes">Extensions can cause performance and stability issues. Disable extensions if you encounter problems with your system.</property>
-                                                                                <property name="activatable-widget">enabledSwitch</property>
+                                                                            <object class="GtkListBox">
+                                                                                <property name="margin-start">10</property>
+                                                                                <property name="margin-end">10</property>
+                                                                                <style>
+                                                                                    <class name="boxed-list" />
+                                                                                </style>
                                                                                 <child>
-                                                                                  <object class="GtkSwitch" id="enabledSwitch">
-                                                                                    <signal name="state_set" handler="user_extensions_set"/>
-                                                                                    <property name="valign">center</property>
-                                                                                  </object>
+                                                                                    <object class="AdwActionRow">
+                                                                                        <property name="title" translatable="yes">Extensions</property>
+                                                                                        <property name="subtitle" translatable="yes">Extensions can cause performance and stability issues. Disable extensions if you encounter problems with your system.</property>
+                                                                                        <property name="activatable-widget">enabledSwitch</property>
+                                                                                        <child>
+                                                                                          <object class="GtkSwitch" id="enabledSwitch">
+                                                                                            <signal name="state_set" handler="user_extensions_set"/>
+                                                                                            <property name="valign">center</property>
+                                                                                          </object>
+                                                                                        </child>
+                                                                                    </object>
                                                                                 </child>
+                                                                            </object>
+                                                                        </child>
+                                                                    </object>
+                                                                </child>
+                                                                <child>
+                                                                    <object class="AdwPreferencesGroup">
+                                                                        <property name="title">User Installed</property>
+                                                                        <property name="margin-start">20</property>
+                                                                        <property name="margin-end">20</property>
+                                                                        <property name="margin-top">20</property>
+                                                                        <property name="margin-bottom">20</property>
+                                                                        <child>
+                                                                            <object class="GtkListBox" id="user_box">
+                                                                                <property name="margin-start">10</property>
+                                                                                <property name="margin-end">10</property>
+                                                                                <style>
+                                                                                    <class name="boxed-list" />
+                                                                                </style>
+                                                                            </object>
+                                                                        </child>
+                                                                    </object>
+                                                                </child>
+                                                                <child>
+                                                                    <object class="AdwPreferencesGroup">
+                                                                        <property name="title">System Installed</property>
+                                                                        <property name="margin-start">20</property>
+                                                                        <property name="margin-end">20</property>
+                                                                        <property name="margin-top">20</property>
+                                                                        <property name="margin-bottom">20</property>
+                                                                        <child>
+                                                                            <object class="GtkListBox" id="system_box">
+                                                                                <property name="margin-start">10</property>
+                                                                                <property name="margin-end">10</property>
+                                                                                <style>
+                                                                                    <class name="boxed-list" />
+                                                                                </style>
                                                                             </object>
                                                                         </child>
                                                                     </object>
                                                                 </child>
                                                             </object>
                                                         </child>
-                                                        <child>
-                                                            <object class="AdwPreferencesGroup">
-                                                                <property name="title">User Installed</property>
-                                                                <property name="margin-start">20</property>
-                                                                <property name="margin-end">20</property>
-                                                                <property name="margin-top">20</property>
-                                                                <property name="margin-bottom">20</property>
-                                                                <child>
-                                                                    <object class="GtkListBox" id="user_box">
-                                                                        <property name="margin-start">10</property>
-                                                                        <property name="margin-end">10</property>
-                                                                        <style>
-                                                                            <class name="boxed-list" />
-                                                                        </style>
-                                                                    </object>
-                                                                </child>
-                                                            </object>
-                                                        </child>
-                                                        <child>
-                                                            <object class="AdwPreferencesGroup">
-                                                                <property name="title">System Installed</property>
-                                                                <property name="margin-start">20</property>
-                                                                <property name="margin-end">20</property>
-                                                                <property name="margin-top">20</property>
-                                                                <property name="margin-bottom">20</property>
-                                                                <child>
-                                                                    <object class="GtkListBox" id="system_box">
-                                                                        <property name="margin-start">10</property>
-                                                                        <property name="margin-end">10</property>
-                                                                        <style>
-                                                                            <class name="boxed-list" />
-                                                                        </style>
-                                                                    </object>
-                                                                </child>
-                                                            </object>
-                                                        </child>
                                                     </object>
-                                                </child>
+                                                </property>
                                             </object>
-                                        </property>
+                                        </child>
+                                    </object>
+                                </child>
+                                <child>
+                                    <object class="AdwViewSwitcherBar">
+                                        <property name="stack">stack</property>
+                                        <property name="reveal" bind-source="switcher_title" bind-property="title-visible" bind-flags="sync-create" />
                                     </object>
                                 </child>
                             </object>
                         </child>
+                    </object>
+                </child>
+                <child>
+                  <object class="GtkBox">
+                        <property name="name">details</property>
+                        <property name="orientation">vertical</property>
                         <child>
-                            <object class="AdwViewSwitcherBar">
-                                <property name="stack">stack</property>
-                                <property name="reveal" bind-source="switcher_title" bind-property="title-visible" bind-flags="sync-create" />
+                            <object class="AdwHeaderBar">
+                                <property name="title-widget">
+                                    <object class="AdwWindowTitle" id="details_title">
+                                        <property name="title" bind-source="ExtensionsWindow" bind-property="title" bind-flags="sync-create" />
+                                    </object>
+                                </property>
+                                <child type="start">
+                                    <object class="GtkButton">
+                                        <property name="valign">center</property>
+                                        <property name="tooltip-text" translatable="yes">Back</property>
+                                        <property name="icon-name">go-previous-symbolic</property>
+                                        <signal name="clicked" handler="back_clicked" />
+                                    </object>
+                                </child>
+                                <child type="end">
+                                    <object class="GtkMenuButton">
+                                        <property name="icon-name">open-menu-symbolic</property>
+                                        <property name="menu-model">primary_menu</property>
+                                    </object>
+                                </child>
                             </object>
                         </child>
                     </object>
