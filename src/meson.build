@@ -5,6 +5,7 @@ sources = [
   'widgets/more_info.vala',
   'widgets/explore.vala',
   'widgets/explore_row.vala',
+  'widgets/details.vala',
   'services/dbus_extensions_service.vala',
   'services/soup_client_service.vala',
   'objects/explore_extension_object.vala'
