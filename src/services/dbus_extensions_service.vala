@@ -29,3 +29,4 @@ namespace Extensions {
         public abstract signal void extension_state_changed (string uuid, GLib.HashTable<string, GLib.Variant> state);
     }
 }
+

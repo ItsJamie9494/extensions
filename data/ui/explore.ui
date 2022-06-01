@@ -2,8 +2,9 @@
 <interface>
     <requires lib="gtk" version="4.0"/>
     <template class="ExtensionsExplore" parent="AdwBin">
+        <signal name="realize" handler="on_realise" />
         <child>
-            <object class="GtkBox">
+            <object class="GtkFlowBox" id="box">
                 <property name="orientation">vertical</property>
                 <child>
                     <object class="GtkLabel">
