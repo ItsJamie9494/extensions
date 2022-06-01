@@ -22,6 +22,7 @@
                                 <property name="tightening-threshold">576</property>
                                 <property name="margin-start">12</property>
                                 <property name="margin-end">12</property>
+                                <property name="margin-bottom">10</property>
                                 <child>
                                     <object class="GtkBox">
                                         <property name="orientation">horizontal</property>
@@ -126,6 +127,59 @@
                                                 </child>
                                             </object>
                                         </child>
+                                    </object>
+                                </child>
+                            </object>
+                        </child>
+                        <child>
+                            <object class="GtkBox">
+                                <property name="orientation">vertical</property>
+                                <property name="spacing">6</property>
+                                <!-- Arbitrary size chosen to tile together at 16:9;
+                                         see https://blogs.gnome.org/hughsie/2014/07/02/blurry-screenshots-in-gnome-software/ -->
+                                <property name="height_request">423</property>
+                                <property name="hexpand">True</property>
+                                <property name="halign">fill</property>
+                                <property name="margin-top">10</property>
+                                <property name="margin-bottom">10</property>
+                                <style>
+                                    <class name="screenshot-image" />
+                                    <class name="frame" />
+                                    <class name="view" />
+                                </style>
+                                <child>
+                                    <object class="GtkImage">
+                                        <property name="pixel_size">64</property>
+                                        <property name="icon_name">camera-photo-symbolic</property>
+                                        <property name="valign">end</property>
+                                        <property name="vexpand">True</property>
+                                    </object>
+                                </child>
+                                <child>
+                                    <object class="GtkLabel">
+                                        <property name="halign">center</property>
+                                        <property name="valign">start</property>
+                                        <property name="vexpand">True</property>
+                                        <property name="label" translatable="yes">No screenshot provided</property>
+                                    </object>
+                                </child>
+                            </object>
+                        </child>
+                        <child>
+                            <object class="AdwClamp">
+                                <property name="maximum-size">860</property>
+                                <property name="tightening-threshold">576</property>
+                                <property name="margin-start">12</property>
+                                <property name="margin-end">12</property>
+                                <child>
+                                    <object class="GtkLabel" id="details_description">
+                                        <property name="halign">fill</property>
+                                        <property name="hexpand">True</property>
+                                        <property name="valign">start</property>
+                                        <property name="xalign">0</property>
+                                        <property name="wrap">True</property>
+                                        <property name="max-width-chars">40</property>
+                                        <property name="margin_bottom">14</property>
                                     </object>
                                 </child>
                             </object>
