@@ -35,9 +35,7 @@
                                       <property name="title">Explore</property>
                                       <property name="icon-name">starred-symbolic</property>
                                       <property name="child">
-                                          <object class="AdwStatusPage">
-                                              <property name="title">Welcome!</property>
-                                          </object>
+                                          <object class="ExtensionsExplore"></object>
                                       </property>
                                     </object>
                                 </child>
