@@ -17,8 +17,14 @@
  */
 
  namespace Extensions {
-    // [GtkTemplate (ui = "/dev/itsjamie9494/Extensions/explore.ui")]
+    [GtkTemplate (ui = "/dev/itsjamie9494/Extensions/explore.ui")]
     public class Details : Adw.Bin {
+        [GtkChild]
+        private unowned Gtk.Image details_icon;
+        [GtkChild]
+        private unowned Gtk.Label details_title;
+        [GtkChild]
+        private unowned Gtk.Label developer_name;
 
         public Details () {
             Object ();
@@ -27,7 +33,11 @@
         construct {
             this.realize.connect (() => {
                 Application.main_window.set_details_content.connect ((extension) => {
-                    print (extension.name);
+                    details_title.set_label (extension.name);
+                    extension.get_gicon.begin ((obj, res) => {
+                        details_icon.set_from_pixbuf (extension.get_gicon.end (res));
+                    });
+                    developer_name.set_label (extension.creator);
                 });
             });
         }
