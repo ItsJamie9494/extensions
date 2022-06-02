@@ -57,47 +57,43 @@ namespace Extensions {
         public Window (Adw.Application app) {
             Object (application: app);
 
-            try {
-                Application.dbus_extensions.list_extensions ().foreach ((extension, variant) => {
-                    if (variant.lookup ("type").get_double () == 1.0) {
-                        var row = new Row (extension, variant);
-                        row.remove_extension_rows.connect ((uuid) => {
-                            var ext = rows.lookup (uuid);
-                            rows.remove (uuid);
-                            if (ext.is_system_extension ()) {
-                                system_box.remove (ext);
-                                ext.unparent ();
-                                ext.destroy ();
-                            } else {
-                                user_box.remove (ext);
-                                ext.unparent ();
-                                ext.destroy ();
-                            }
-                        });
-                        rows.insert (extension, row);
-                        system_box.append (rows.lookup (extension));
-                    } else {
-                        var row = new Row (extension, variant);
-                        row.remove_extension_rows.connect ((uuid) => {
-                            var ext = rows.lookup (uuid);
-                            rows.remove (uuid);
-                            if (ext.is_system_extension ()) {
-                                system_box.remove (ext);
-                                ext.unparent ();
-                                ext.destroy ();
-                            } else {
-                                user_box.remove (ext);
-                                ext.unparent ();
-                                ext.destroy ();
-                            }
-                        });
-                        rows.insert (extension, row);
-                        user_box.append (rows.lookup (extension));
-                    }
-                });
-            } catch (GLib.Error e) {
-                print ("%s\n", e.message);
-            }
+            Application.installed_extensions.foreach ((extension, variant) => {
+                if (variant.lookup ("type").get_double () == 1.0) {
+                    var row = new Row (extension, variant);
+                    row.remove_extension_rows.connect ((uuid) => {
+                        var ext = rows.lookup (uuid);
+                        rows.remove (uuid);
+                        if (ext.is_system_extension ()) {
+                            system_box.remove (ext);
+                            ext.unparent ();
+                            ext.destroy ();
+                        } else {
+                            user_box.remove (ext);
+                            ext.unparent ();
+                            ext.destroy ();
+                        }
+                    });
+                    rows.insert (extension, row);
+                    system_box.append (rows.lookup (extension));
+                } else {
+                    var row = new Row (extension, variant);
+                    row.remove_extension_rows.connect ((uuid) => {
+                        var ext = rows.lookup (uuid);
+                        rows.remove (uuid);
+                        if (ext.is_system_extension ()) {
+                            system_box.remove (ext);
+                            ext.unparent ();
+                            ext.destroy ();
+                        } else {
+                            user_box.remove (ext);
+                            ext.unparent ();
+                            ext.destroy ();
+                        }
+                    });
+                    rows.insert (extension, row);
+                    user_box.append (rows.lookup (extension));
+                }
+            });
 
             Application.dbus_extensions.extension_state_changed.connect ((uuid) => {
                if (!rows.contains (uuid)) {
