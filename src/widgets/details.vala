@@ -141,6 +141,13 @@
 
         private void handle_action_button (GLib.HashTable<string, GLib.Variant> state) {
             action_button.set_sensitive (true);
+            if (state.lookup ("type").get_double () == 1.0) {
+                action_button.set_label ("Uninstall");
+                button_action = Action.UNINSTALL;
+                set_action_button_style (StyleClass.DESTRUCTIVE);
+                action_button.set_sensitive (false);
+                action_button.set_tooltip_markup ("This is a system extension");
+            }
             if (state.lookup ("state").get_double () == 1.0 ||
                 state.lookup ("state").get_double () == 2.0 ||
                 state.lookup ("state").get_double () == 6.0) {
