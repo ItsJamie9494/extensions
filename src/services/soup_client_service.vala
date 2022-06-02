@@ -38,7 +38,8 @@ namespace Extensions {
                 // TODO add more error handling lol
                 Soup.Message message = new Soup.Message (
                     "GET",
-                    "https://extensions.gnome.org/extension-query/?n_per_page=21&shell_version=42"
+                    "https://extensions.gnome.org/extension-query/?n_per_page=21&shell_version=" +
+                    Application.dbus_extensions.shell_version
                 );
                 var res = yield session.send_async (message, 1, null);
                 Json.Parser parser = new Json.Parser ();
