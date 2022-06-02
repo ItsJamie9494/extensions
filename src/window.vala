@@ -31,6 +31,8 @@ namespace Extensions {
         private unowned Adw.WindowTitle details_title;
         [GtkChild]
         private unowned Adw.ViewStack stack;
+        [GtkChild]
+        private unowned Gtk.Stack main_stack;
 
         [GtkChild]
         private unowned Gtk.SearchBar search_bar;
@@ -45,17 +47,13 @@ namespace Extensions {
 
         [GtkCallback]
         public void search_bar_search_mode_enabled_changed_cb (Object source, GLib.ParamSpec pspec) {
-            // var child = main_stack.get_visible_child_name ();
+            var child = main_stack.get_visible_child_name ();
 
-            // I want to provide transitions but until I nail the timing, nah
-            // if (child != "search_shell") {
-            //     search_view.reset ();
-                //  main_stack.set_transition_type (Gtk.StackTransitionType.OVER_DOWN);
-            //     main_stack.set_visible_child_name ("search_shell");
-            // } else {
-                //  main_stack.set_transition_type (Gtk.StackTransitionType.UNDER_DOWN);
-            //     main_stack.set_visible_child_name ("main_shell");
-            // }
+            if (child != "search") {
+                main_stack.set_visible_child_name ("search");
+            } else {
+                main_stack.set_visible_child_name ("main");
+            }
         }
 
         [GtkCallback]
