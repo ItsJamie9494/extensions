@@ -7,6 +7,7 @@
     <file alias="row.ui">ui/row.ui</file>
     <file alias="explore.ui">ui/explore.ui</file>
     <file alias="details.ui">ui/details.ui</file>
+    <file alias="search.ui">ui/search.ui</file>
     <file alias="gtk/help-overlay.ui">ui/gtk/help-overlay.ui</file>
   </gresource>
 

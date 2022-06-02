@@ -70,6 +70,7 @@ namespace Extensions {
 
             typeof (Explore).ensure ();
             typeof (Details).ensure ();
+            typeof (Search).ensure ();
         }
 
         private void on_about_action () {

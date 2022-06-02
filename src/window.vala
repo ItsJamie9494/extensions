@@ -44,12 +44,15 @@ namespace Extensions {
         public GLib.HashTable<string, Row> rows = new GLib.HashTable<string, Row> (str_hash, str_equal);
         public signal void set_details_content (ExploreExtensionObject obj);
         public signal void explore_loaded ();
+        public signal void search_reset ();
+        public signal void search_query (string query);
 
         [GtkCallback]
         public void search_bar_search_mode_enabled_changed_cb (Object source, GLib.ParamSpec pspec) {
             var child = main_stack.get_visible_child_name ();
 
             if (child != "search") {
+                search_reset ();
                 main_stack.set_visible_child_name ("search");
             } else {
                 main_stack.set_visible_child_name ("main");
@@ -85,7 +88,7 @@ namespace Extensions {
                 if (stack.get_visible_child_name () == "installed") {
                     print ("installed search");
                 } else if (stack.get_visible_child_name () == "explore") {
-                    print ("explore search");
+                    search_query (query);
                 }
             }
         }
