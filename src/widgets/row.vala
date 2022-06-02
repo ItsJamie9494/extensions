@@ -128,7 +128,7 @@ namespace Extensions {
                 errorLabel.set_visible (true);
                 enabledSwitch.set_sensitive (false);
             }
-            if (variant.lookup ("hasUpdate").get_boolean () == true) {
+            if (variant.lookup ("hasUpdate").get_boolean () == true || variant.lookup ("state").get_double () == 4.0) {
                 updatesIcon.set_visible (true);
             }
             if (variant.lookup ("hasPrefs").get_boolean () == true) {

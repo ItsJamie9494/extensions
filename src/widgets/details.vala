@@ -74,6 +74,12 @@
                 Application.main_window.set_details_content.connect ((extension) => {
                     uuid = extension.uuid;
 
+                    if (Application.installed_extensions.contains (uuid)) {
+                        action_button.set_label ("Uninstall");
+                    } else {
+                        action_button.set_label ("Install");
+                    }
+
                     screenshot_stack.set_visible_child_name ("loading");
                     details_title.set_label (extension.name);
                     extension.get_gicon.begin ((obj, res) => {
@@ -95,6 +101,20 @@
                     }
 
                     load_screenshot (extension);
+                });
+
+                Application.dbus_extensions.extension_state_changed.connect ((input_uuid, state) => {
+                    if (input_uuid == uuid) {
+                        if (state.lookup ("state").get_double () == 1.0 ||
+                            state.lookup ("state").get_double () == 2.0 ||
+                            state.lookup ("state").get_double () == 6.0) {
+                            action_button.set_label ("Uninstall");
+                        } else if (state.lookup ("state").get_double () == 4.0) {
+                            action_button.set_label ("Update");
+                        } else {
+                            print (state.lookup ("state").get_double ().to_string ());
+                        }
+                    }
                 });
             });
         }
