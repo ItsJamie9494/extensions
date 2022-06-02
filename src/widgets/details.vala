@@ -94,11 +94,11 @@
                         screenshot_stack.set_visible_child_name ("screenshot");
                     } catch (GLib.Error e) {
                         print ("%s\n", e.message);
-                        screenshot_stack.set_visible_child_name ("gay");
+                        screenshot_stack.set_visible_child_name ("no-shot");
                     }
                 });
             } else {
-                screenshot_stack.set_visible_child_name ("gay");
+                screenshot_stack.set_visible_child_name ("no-shot");
             }
         }
     }
