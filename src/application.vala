@@ -27,6 +27,7 @@ namespace Extensions {
 
         public static ExtensionsService dbus_extensions;
         public static Extensions.Window main_window;
+        public static GLib.HashTable<string,GLib.HashTable<string,GLib.Variant>> installed_extensions;
         
         construct {
             ActionEntry[] action_entries = {
@@ -44,6 +45,20 @@ namespace Extensions {
                 print ("%s\n", e.message);
                 return;
             }
+
+            try {
+                installed_extensions = dbus_extensions.list_extensions ();
+            } catch (GLib.Error e) {
+                print ("%s\n", e.message);
+            }
+
+            dbus_extensions.extension_state_changed.connect (() => {
+                try {
+                    installed_extensions = dbus_extensions.list_extensions ();
+                } catch (GLib.Error e) {
+                    print ("%s\n", e.message);
+                }
+            });
 
             base.activate ();
             var win = this.active_window;
