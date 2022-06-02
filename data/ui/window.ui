@@ -182,9 +182,7 @@
                                     <object class="GtkStackPage">
                                         <property name="name">search</property>
                                         <property name="child">
-                                            <object class="GtkLabel">
-                                                <property name="label">gay bitch</property>
-                                            </object>
+                                            <object class="ExtensionsSearch"></object>
                                         </property>
                                     </object>
                                 </child>

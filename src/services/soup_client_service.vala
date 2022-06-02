@@ -19,6 +19,7 @@
 namespace Extensions {
     public errordomain SoupError {
         JSON_ERROR,
+        NO_RESULTS,
         UNKNOWN
     }
 
@@ -53,6 +54,34 @@ namespace Extensions {
                 }
             } catch (GLib.Error e) {
                 print ("%s\n", e.message);
+                throw new SoupError.UNKNOWN ("Unknown Error");
+            }
+        }
+
+        public async Json.Array search_extensions (string query) throws SoupError {
+            try {
+                // TODO add more error handling lol
+                Soup.Message message = new Soup.Message (
+                    "GET",
+                    "https://extensions.gnome.org/extension-query/?search=" + query + "&shell_version=" +
+                    Application.dbus_extensions.shell_version
+                );
+                var res = yield session.send_async (message, 1, null);
+                Json.Parser parser = new Json.Parser ();
+                parser.load_from_stream (res);
+                Json.Node root = parser.get_root ();
+                if (root.get_object ().get_member ("total").get_int () == 0) {
+                    throw new SoupError.NO_RESULTS ("No Results");
+                }
+                Json.Node extensions = root.get_object ().get_member ("extensions");
+                if (extensions.get_node_type () != Json.NodeType.ARRAY) {
+                    throw new SoupError.JSON_ERROR ("Invalid JSON type");
+                } else {
+                    return extensions.get_array ();
+                }
+            } catch (SoupError e) {
+                throw e;
+            } catch (GLib.Error e) {
                 throw new SoupError.UNKNOWN ("Unknown Error");
             }
         }
