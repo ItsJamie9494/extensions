@@ -1,6 +1,7 @@
 sources = [
   'application.vala',
   'window.vala',
+  'screenshot_cache.vala',
   'widgets/row.vala',
   'widgets/more_info.vala',
   'widgets/explore.vala',
@@ -16,7 +17,8 @@ deps = [
   dependency('libadwaita-1', version: '>= 1.0'),
   dependency('gio-2.0'),
   dependency('json-glib-1.0'),
-  dependency('libsoup-3.0')
+  dependency('libsoup-3.0'),
+  dependency('gee-0.8')
 ]
 
 gnome = import('gnome')
