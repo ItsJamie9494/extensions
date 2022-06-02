@@ -8,6 +8,7 @@ sources = [
   'widgets/details.vala',
   'services/dbus_extensions_service.vala',
   'services/soup_client_service.vala',
+  'services/thread_service.vala',
   'objects/explore_extension_object.vala'
 ]
 
