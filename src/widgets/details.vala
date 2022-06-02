@@ -31,6 +31,10 @@
         private unowned Adw.ActionRow project_website_row;
         [GtkChild]
         private unowned Adw.ActionRow dev_row;
+        [GtkChild]
+        private unowned Adw.Bin screenshot_box;
+        [GtkChild]
+        private unowned Gtk.Stack screenshot_stack;
 
         [GtkCallback]
         public void on_url_clicked (Adw.ActionRow source) {
@@ -45,6 +49,7 @@
         construct {
             this.realize.connect (() => {
                 Application.main_window.set_details_content.connect ((extension) => {
+                    screenshot_stack.set_visible_child_name ("loading");
                     details_title.set_label (extension.name);
                     extension.get_gicon.begin ((obj, res) => {
                         details_icon.set_from_pixbuf (extension.get_gicon.end (res));
@@ -63,8 +68,38 @@
                         dev_row.set_subtitle (extension.get_uri_hostname (extension.creator_url));
                         dev_row.set_visible (true);
                     }
+
+                    load_screenshot (extension);
                 });
             });
+        }
+
+        private void load_screenshot (ExploreExtensionObject obj) {
+            var cache = new ScreenshotCache ();
+            int MAX_WIDTH = 800;
+
+            if (obj.screenshot != null && obj.screenshot != "null") {
+                cache.fetch.begin ("https://extensions.gnome.org%s".printf (obj.screenshot), (obj, res) => {
+                    try {
+                        var path = cache.fetch.end (res);
+                        var pixbuf = new Gdk.Pixbuf.from_file_at_scale (path, MAX_WIDTH * scale_factor, 600 * scale_factor, true);
+                        var image = new Gtk.Picture.for_pixbuf (pixbuf);
+                        image.height_request = 423;
+                        image.halign = Gtk.Align.CENTER;
+                        image.get_style_context ().add_class ("screenshot-image");
+                        image.get_style_context ().add_class ("image1");
+
+                        image.show ();
+                        screenshot_box.set_child (image);
+                        screenshot_stack.set_visible_child_name ("screenshot");
+                    } catch (GLib.Error e) {
+                        print ("%s\n", e.message);
+                        screenshot_stack.set_visible_child_name ("gay");
+                    }
+                });
+            } else {
+                screenshot_stack.set_visible_child_name ("gay");
+            }
         }
     }
 }
