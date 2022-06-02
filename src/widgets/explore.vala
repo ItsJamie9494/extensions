@@ -21,18 +21,50 @@
     public class Explore : Adw.Bin {
         [GtkChild]
         private unowned Gtk.FlowBox box;
+        [GtkChild]
+        private unowned Gtk.Stack stack;
+
+        [GtkChild]
+        private unowned Adw.StatusPage loader;
+
+        // I always love my easter eggs
+        string[] loading_messages = {
+            "Hang tight...",
+            "Generating witty text...",
+            "Swapping time and space...",
+            "Flowing the bits...",
+            "Reticulating splines...",
+            "Spinning the wheel of fortune...",
+            "Computing chances of success...",
+            "Adjusting the flux capacitor...",
+            "Keeping all the 1's and removing all the 0's...",
+            "Creating time-loop inversion field...",
+            "Cleaning off the cobwebs...",
+            "Connecting Neurotoxin Storage Tank...",
+            "Convincing AI not to turn evil...",
+            "Dividing by zero...",
+            "Twiddling thumbs...",
+            "Downloading more RAM...",
+            "Mining some bitcoins...",
+        };
 
         [GtkCallback]
         public void on_realise () {
+            loader.set_description (loading_messages[GLib.Random.int_range (0, loading_messages.length)]);
+
             SoupClient.get_default ().get_extensions.begin ((obj, res) => {
                 try {
                     Json.Array extensions = SoupClient.get_default ().get_extensions.end (res);
-                    extensions.get_elements ().foreach ((node) => {
-                        if (node.get_node_type () == Json.NodeType.OBJECT) {
-                            ExploreExtensionObject extension_obj = new ExploreExtensionObject (node.get_object ());
-                            box.append (new ExploreRow (extension_obj));
-                        }
+                    ThreadService.run_in_thread.begin<void> (() => {
+                        extensions.get_elements ().foreach ((node) => {
+                            if (node.get_node_type () == Json.NodeType.OBJECT) {
+                                ExploreExtensionObject extension_obj = new ExploreExtensionObject (node.get_object ());
+                                box.append (new ExploreRow (extension_obj));
+                            }
+                        });
+                        stack.set_visible_child_name ("content");
                     });
+
                 } catch (SoupError e) {
                     print ("%s\n", e.message);
                 }
