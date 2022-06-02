@@ -127,6 +127,7 @@ namespace Extensions {
                 errorLabel.set_label (variant.lookup ("error").get_string ());
                 errorLabel.set_visible (true);
                 enabledSwitch.set_sensitive (false);
+                enabledSwitch.set_active (false);
             }
             if (variant.lookup ("hasUpdate").get_boolean () == true || variant.lookup ("state").get_double () == 4.0) {
                 updatesIcon.set_visible (true);
@@ -164,6 +165,8 @@ namespace Extensions {
                 enabledSwitch.set_sensitive (true);
                 if (global_state == 1.0) {
                     enabledSwitch.set_active (true);
+                } else if (global_state == 3.0) {
+                    enabledSwitch.set_sensitive (false);
                 }
                 should_set_state = true;
             }
