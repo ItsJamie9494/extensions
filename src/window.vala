@@ -29,6 +29,8 @@ namespace Extensions {
         private unowned Adw.Leaflet leaflet;
         [GtkChild]
         private unowned Adw.WindowTitle details_title;
+        [GtkChild]
+        private unowned Adw.ViewStack stack;
 
         [GtkChild]
         private unowned Gtk.SearchBar search_bar;
@@ -77,6 +79,19 @@ namespace Extensions {
             set_details_content (obj);
         }
 
+        private void trigger_search () {
+            unowned string query = entry_search.text;
+            bool query_valid = query.length >= 3;
+
+            if (query_valid) {
+                if (stack.get_visible_child_name () == "installed") {
+                    print ("installed search");
+                } else if (stack.get_visible_child_name () == "explore") {
+                    print ("explore search");
+                }
+            }
+        }
+
         public Window (Adw.Application app) {
             Object (application: app);
 
@@ -96,9 +111,15 @@ namespace Extensions {
                 return false;
             });
             entry_search.add_controller (key_press_event);
+            entry_search.search_changed.connect (() => trigger_search ());
 
             explore_loaded.connect (() => {
                 search_button.set_sensitive (true);
+            });
+
+            stack.notify["visible-child"].connect (() => {
+                // disable search on page switch
+                search_button.set_active (false);
             });
 
             Application.installed_extensions.foreach ((extension, variant) => {

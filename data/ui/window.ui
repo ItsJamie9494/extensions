@@ -70,6 +70,7 @@
                                         <property name="vexpand">True</property>
                                         <child>
                                             <object class="AdwViewStackPage">
+                                              <property name="name">explore</property>
                                               <property name="title">Explore</property>
                                               <property name="icon-name">starred-symbolic</property>
                                               <property name="child">
@@ -79,6 +80,7 @@
                                         </child>
                                         <child>
                                             <object class="AdwViewStackPage">
+                                                <property name="name">installed</property>
                                                 <property name="title">My Extensions</property>
                                                 <property name="icon-name">application-x-addon-symbolic</property>
                                                 <property name="child">
