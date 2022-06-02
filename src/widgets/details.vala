@@ -59,8 +59,8 @@
                     }
 
                     if (extension.creator_url != "null") {
-                        dev_row.set_name (extension.creator_url);
-                        dev_row.set_subtitle (extension.get_uri_hostname ("https://extensions.gnome.org%s".printf (extension.creator_url)));
+                        dev_row.set_name ("https://extensions.gnome.org%s".printf (extension.creator_url));
+                        dev_row.set_subtitle (extension.get_uri_hostname (extension.creator_url));
                         dev_row.set_visible (true);
                     }
                 });
