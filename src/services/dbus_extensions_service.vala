@@ -25,6 +25,7 @@ namespace Extensions {
         public abstract bool enable_extension (string uuid) throws GLib.Error;
         public abstract bool disable_extension (string uuid) throws GLib.Error;
         public abstract bool uninstall_extension (string uuid) throws GLib.Error;
+        public abstract string install_remote_extension (string uuid) throws GLib.Error;
         public abstract bool user_extensions_enabled { owned get; set; }
         public abstract signal void extension_state_changed (string uuid, GLib.HashTable<string, GLib.Variant> state);
     }
