@@ -63,6 +63,7 @@
                             }
                         });
                         stack.set_visible_child_name ("content");
+                        Application.main_window.explore_loaded ();
                     });
 
                 } catch (SoupError e) {
