@@ -43,16 +43,39 @@
 
         private string uuid;
 
+        private enum Action {
+            INSTALL,
+            UNINSTALL,
+            UPDATE
+        }
+
+        private enum StyleClass {
+            SUGGESTED,
+            DESTRUCTIVE
+        }
+
+        private Action button_action;
+
         [GtkCallback]
         public void action_clicked () {
             action_button.set_sensitive (false);
             progress_spinner.set_visible (true);
 
             try {
-                var success = Application.dbus_extensions.install_remote_extension (uuid);
-                if (success == "successful") {
-                    action_button.set_sensitive (true);
-                    progress_spinner.set_visible (false);
+                if (button_action == Action.INSTALL) {
+                    var success = Application.dbus_extensions.install_remote_extension (uuid);
+                    if (success == "successful") {
+                        action_button.set_sensitive (true);
+                        progress_spinner.set_visible (false);
+                    }
+                } else if (button_action == Action.UPDATE) {
+                    print ("TODO provide extension updates");
+                } else if (button_action == Action.UNINSTALL) {
+                    var success = Application.dbus_extensions.uninstall_extension (uuid);
+                    if (success == true) {
+                        action_button.set_sensitive (true);
+                        progress_spinner.set_visible (false);
+                    }
                 }
             } catch (Error e) {
                 print ("%s\n", e.message);
@@ -73,11 +96,16 @@
             this.realize.connect (() => {
                 Application.main_window.set_details_content.connect ((extension) => {
                     uuid = extension.uuid;
+                    progress_spinner.set_visible (false);
 
+                    // TODO make this match the bottom state code
                     if (Application.installed_extensions.contains (uuid)) {
-                        action_button.set_label ("Uninstall");
+                        handle_action_button (Application.installed_extensions[uuid]);
                     } else {
                         action_button.set_label ("Install");
+                        button_action = Action.INSTALL;
+                        action_button.set_sensitive (true);
+                        set_action_button_style (StyleClass.SUGGESTED);
                     }
 
                     screenshot_stack.set_visible_child_name ("loading");
@@ -105,18 +133,48 @@
 
                 Application.dbus_extensions.extension_state_changed.connect ((input_uuid, state) => {
                     if (input_uuid == uuid) {
-                        if (state.lookup ("state").get_double () == 1.0 ||
-                            state.lookup ("state").get_double () == 2.0 ||
-                            state.lookup ("state").get_double () == 6.0) {
-                            action_button.set_label ("Uninstall");
-                        } else if (state.lookup ("state").get_double () == 4.0) {
-                            action_button.set_label ("Update");
-                        } else {
-                            print (state.lookup ("state").get_double ().to_string ());
-                        }
+                        handle_action_button (state);
                     }
                 });
             });
+        }
+
+        private void handle_action_button (GLib.HashTable<string, GLib.Variant> state) {
+            action_button.set_sensitive (true);
+            if (state.lookup ("state").get_double () == 1.0 ||
+                state.lookup ("state").get_double () == 2.0 ||
+                state.lookup ("state").get_double () == 6.0) {
+                action_button.set_label ("Uninstall");
+                button_action = Action.UNINSTALL;
+                set_action_button_style (StyleClass.DESTRUCTIVE);
+            } else if (state.lookup ("state").get_double () == 4.0) {
+                action_button.set_label ("Update");
+                button_action = Action.UPDATE;
+                set_action_button_style (StyleClass.SUGGESTED);
+            } else if (state.lookup ("state").get_double () == 3.0) {
+                action_button.set_label ("Error");
+                action_button.set_sensitive (false);
+                set_action_button_style (StyleClass.DESTRUCTIVE);
+            } else if (state.lookup ("state").get_double () == 99.0) {
+                action_button.set_label ("Install");
+                button_action = Action.INSTALL;
+                action_button.set_sensitive (true);
+                set_action_button_style (StyleClass.SUGGESTED);
+            } else {
+                action_button.set_label ("Working...");
+                action_button.set_sensitive (false);
+            }
+        }
+
+        private void set_action_button_style (StyleClass style) {
+            action_button.get_style_context ().remove_class ("suggested-action");
+            action_button.get_style_context ().remove_class ("destructive-action");
+
+            if (style == StyleClass.SUGGESTED) {
+                action_button.get_style_context ().add_class ("suggested-action");
+            } else if (style == StyleClass.DESTRUCTIVE) {
+                action_button.get_style_context ().add_class ("destructive-action");
+            }
         }
 
         private void load_screenshot (ExploreExtensionObject obj) {
