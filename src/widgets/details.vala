@@ -36,6 +36,29 @@
         [GtkChild]
         private unowned Gtk.Stack screenshot_stack;
 
+        [GtkChild]
+        private unowned Gtk.Button action_button;
+        [GtkChild]
+        private unowned Gtk.Spinner progress_spinner;
+
+        private string uuid;
+
+        [GtkCallback]
+        public void action_clicked () {
+            action_button.set_sensitive (false);
+            progress_spinner.set_visible (true);
+
+            try {
+                var success = Application.dbus_extensions.install_remote_extension (uuid);
+                if (success == "successful") {
+                    action_button.set_sensitive (true);
+                    progress_spinner.set_visible (false);
+                }
+            } catch (Error e) {
+                print ("%s\n", e.message);
+            }
+        }
+
         [GtkCallback]
         public void on_url_clicked (Adw.ActionRow source) {
             Gtk.show_uri_full.begin (null, source.get_name (), Gdk.CURRENT_TIME, null);
@@ -49,6 +72,8 @@
         construct {
             this.realize.connect (() => {
                 Application.main_window.set_details_content.connect ((extension) => {
+                    uuid = extension.uuid;
+
                     screenshot_stack.set_visible_child_name ("loading");
                     details_title.set_label (extension.name);
                     extension.get_gicon.begin ((obj, res) => {
