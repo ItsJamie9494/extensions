@@ -4,21 +4,49 @@
     <template class="ExtensionsExplore" parent="AdwBin">
         <signal name="realize" handler="on_realise" />
         <child>
-            <object class="GtkScrolledWindow">
-                <property name="hscrollbar-policy">never</property>
-                <property name="min-content-width">900</property>
+            <object class="GtkStack" id="stack">
+                <property name="transition-type">under-left</property>
                 <child>
-                    <object class="GtkFlowBox" id="box">
-                        <signal name="child-activated" handler="on_click" />
-                        <property name="min-children-per-line">3</property>
-                        <property name="column-spacing">14</property>
-                        <property name="row-spacing">14</property>
-                        <property name="valign">start</property>
-                        <property name="hexpand">True</property>
-                        <property name="margin-start">20</property>
-                        <property name="margin-end">20</property>
-                        <property name="margin-top">20</property>
-                        <property name="margin-bottom">20</property>
+                    <object class="GtkStackPage">
+                        <property name="name">loading</property>
+                        <property name="child">
+                            <object class="AdwStatusPage" id="loader">
+                                <property name="title">Loading Extensions</property>
+                                <property name="description">Hang tight...</property>
+                                <property name="child">
+                                    <object class="GtkSpinner">
+                                        <property name="spinning">true</property>
+                                        <property name="height-request">36</property>
+                                        <property name="width-request">36</property>
+                                    </object>
+                                </property>
+                            </object>
+                        </property>
+                    </object>
+                </child>
+                <child>
+                    <object class="GtkStackPage">
+                        <property name="name">content</property>
+                        <property name="child">
+                            <object class="GtkScrolledWindow">
+                                <property name="hscrollbar-policy">never</property>
+                                <property name="min-content-width">900</property>
+                                <child>
+                                    <object class="GtkFlowBox" id="box">
+                                        <signal name="child-activated" handler="on_click" />
+                                        <property name="min-children-per-line">3</property>
+                                        <property name="column-spacing">14</property>
+                                        <property name="row-spacing">14</property>
+                                        <property name="valign">start</property>
+                                        <property name="hexpand">True</property>
+                                        <property name="margin-start">20</property>
+                                        <property name="margin-end">20</property>
+                                        <property name="margin-top">20</property>
+                                        <property name="margin-bottom">20</property>
+                                    </object>
+                                </child>
+                            </object>
+                        </property>
                     </object>
                 </child>
             </object>
