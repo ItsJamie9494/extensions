@@ -176,7 +176,7 @@
                                         </child>
                                         <child>
                                             <object class="GtkStackPage">
-                                                <property name="name">gay</property>
+                                                <property name="name">no-shot</property>
                                                 <property name="child">
                                                     <object class="GtkBox">
                                                         <property name="orientation">vertical</property>
